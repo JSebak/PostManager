@@ -12,5 +12,5 @@ for the backend, you should have the .NET 6 installed, click in the solution and
 then build the solution an click run in the VStudio toolbar.
 
 
-the Estimated time it took to develop this Test was approx 25 laboral days, with an average of 4~6 hours daily between study,
-development and some reunions, for a total of 125h of which 24~30h were spended in the front end part
+the Estimated time it took to develop this Test was approx 25 laboral days, with an average of 4\~6 hours daily between study,
+development and some reunions, for a total of 125h of which 24\~30h were spended in the front end part
