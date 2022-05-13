@@ -1,0 +1,22 @@
+<div class="Screen">
+    <div class="Header">
+        <button (click)="home()">Home</button>
+        <button *ngIf="user?.role == 'Writer'" (click)="redirect()">Create Post</button>
+        <button *ngIf="user?.role == 'Writer'" (click)="myPosts()">My Posts</button>
+        <button *ngIf="user?.role == 'Editor'" (click)="redirect()">Review Posts</button>
+        <button (click)="logout()">Logout</button>
+        <div style="background-color: rgba(193, 79, 79, 0.742);width: 20%;font-weight: 700;">
+            <span> User: {{user == "guest" ? "guest" : user?.username }}</span>
+             <span *ngIf="user != 'guest' "> Role: {{user?.role}}</span>
+        </div>
+        
+    </div>
+    <div class = "Content">
+        <postlist-component *ngIf="count == 0" (selectedPost)="selected($event)" [title]="'Posts'"></postlist-component>
+        <postlist-component *ngIf="count == 2 && user?.role == 'Editor'" (selectedPost)="selected($event)" [user]="user" [title]="'Pending posts'"></postlist-component> 
+        <postlist-component *ngIf="count == 5 && user?.role == 'Writer'" (selectedPost)="selected($event)" [user]="user" [title]="'My posts'"></postlist-component> 
+        <newpost-component [user]="user" *ngIf="count == 1"></newpost-component>
+        <editpost-component [post]="selectedPost" *ngIf="count == 3 && user?.role == 'Writer'"> </editpost-component>
+        <postdetails-component *ngIf="count == 4 && selectedPost != null" [post]="selectedPost" [user]="user" (deleted)="home()" (modify)="edit($event)"></postdetails-component>
+    </div>
+</div>

@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="View">
+        <div class="Header">
+            <a class="Title">{{post.title}}</a>
+            <span style="font-weight: 700; margin-left:10px" *ngIf="post.authorId == user.id || user.role == 'Editor'">Status: {{status}}</span>
+            <button class="Approve" *ngIf="user?.role == 'Editor'" (click)="reviewPost(true)">Approve</button>
+            <button class="Reject" *ngIf="user?.role == 'Editor'" (click)="reviewPost(false)">Reject</button>
+            <button class="Delete" *ngIf="user?.role == 'Editor'" (click)="deletePost()">DELETE</button>
+            <div class="HeaderText">
+                <span>{{post.authorId}}</span>
+                <span>{{post.creationDate}}</span>
+            </div>
+        </div>
+        <div class ="Content">
+            {{post.content}}
+        </div>
+        <div class="Footer">
+            <div *ngFor="let comment of comments">
+                <button *ngIf="user?.role == 'Editor'" (click)="deleteComment(comment.id)">X</button>
+                <div class="Comment">   
+                    <div class="TitleCommnet">
+                        <span>{{comment?.authorId == null ? "guest" : comment?.authorId}}</span>
+                    </div>
+                    <div class="Body">
+                        {{comment?.content}}
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="comments == null || comments?.length == 0">
+                No comments
+            </div>
+            <form [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+                <input type="text" formControlName="content" placeholder="Comment on this post">
+            </form>
+            <button (click)="onSubmit()" [disabled]="commentForm.invalid">Add Comment</button>
+        </div>    
+    </div>
+    <button *ngIf="this.user.role == 'Writer' && this.user.id == this.post.authorId"
+    (click)="edit()">Edit Post</button>
+    
+</div>

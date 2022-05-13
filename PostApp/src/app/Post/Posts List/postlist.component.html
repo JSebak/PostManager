@@ -1,0 +1,8 @@
+<div class="Container">
+    <span class="ListTitle">{{title}}</span>
+    <div class="List" *ngIf="posts!=null && posts.length > 0">
+        <div *ngFor="let post of posts">
+            <post-component [post]="post" (selected)="selected($event)"></post-component>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<div style="background-color: rgb(100, 100, 100); display: flex; flex-direction: column;align-items: center">
+    <div style="width: 30%;">
+        Login
+    </div>
+    <div style="display: flex; flex-direction: column;align-items: center">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <input type="text" formControlName = "username" placeholder="Enter your username"/>
+            <input type="password" formControlName = "password" placeholder="Enter your password">
+        </form>
+        <button type="submit" (click)="onSubmit()" [disabled]="loginForm.invalid">Login</button>
+        <button (click)="guest()">Continue as a Guest</button>
+    </div>
+</div>
+<button>Register</button>
+<div *ngIf="loginForm.invalid && (loginForm.dirty || loginForm.touched)"
+    class="alert alert-danger" style="background-color: rgba(255, 8, 0, 0.407);border-radius: 8px;color: rgb(145, 5, 0);">
+
+  <div *ngIf="loginForm.controls['username'].invalid && (loginForm.controls['username'].dirty || loginForm.controls['username'].touched)">
+    Name is required.
+  </div>
+  <div *ngIf="loginForm.controls['username'].hasError('minlength')">
+      Name should be at least 4 characters long
+  </div>
+  <div *ngIf="loginForm.controls['username'].hasError('maxlength')">
+    Name should be maximum 20 characters long
+  </div>
+  <div *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['username'].dirty || loginForm.controls['username'].touched)">
+    Password is required.
+  </div>
+  <div *ngIf="loginForm.controls['password'].hasError('minlength')">
+    Password should be at least 6 characters long.
+  </div>
+  <div *ngIf="loginForm.controls['password'].hasError('maxlength')">
+    Password should be maximum 20 characters long.
+  </div>
+</div>

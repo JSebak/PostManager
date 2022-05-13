@@ -1,0 +1,22 @@
+<div class = "Container">
+    <div class = "View">
+        <div class="Header">
+            <span class="Title">Create your post!</span>
+        </div>
+        <div class="Body">
+            <div>
+                <form [formGroup]="postForm" (ngSubmit)="onSubmit()">
+                    <input type="text" formControlName="title" placeholder="Enter the title">
+                    <input type="text" formControlName="content" placeholder="Enter the content of the post">
+                </form>
+                <button type="submit" (click)="onSubmit()" [disabled]="postForm.invalid">
+                    Create 
+                </button>
+            </div>
+        </div>
+        <div class="Footer">
+
+        </div>
+
+    </div>
+</div>
